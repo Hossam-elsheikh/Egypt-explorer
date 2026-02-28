@@ -1,24 +1,27 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Profile } from "@/lib/types";
-import { Menu, X, Search, MapPin, Heart, LogOut, User, Settings, ChevronDown, Compass } from "lucide-react";
+import { Menu, X, Search, MapPin, Heart, LogOut, User, Settings, ChevronDown, Compass, Landmark, Utensils, CupSoda, Sailboat, Hotel, Map } from "lucide-react";
 import Image from "next/image";
 
-const NAV_LINKS = [
-    { href: "/explore/places", label: "Places", icon: "🏛️" },
-    { href: "/explore/food", label: "Food", icon: "🍽️" },
-    { href: "/explore/drinks", label: "Drinks", icon: "🥤" },
-    { href: "/explore/activities", label: "Activities", icon: "⛵" },
-    { href: "/explore/hotels", label: "Hotels", icon: "🏨" },
-    { href: "/explore/services", label: "Services", icon: "🗺️" },
-];
-
 export function Navbar() {
+    const t = useTranslations("Navbar");
+
+    const NAV_LINKS = [
+        { href: "/explore/places", label: t("places"), icon: Landmark },
+        { href: "/explore/food", label: t("food"), icon: Utensils },
+        { href: "/explore/drinks", label: t("drinks"), icon: CupSoda },
+        { href: "/explore/activities", label: t("activities"), icon: Sailboat },
+        { href: "/explore/hotels", label: t("hotels"), icon: Hotel },
+        { href: "/explore/services", label: t("services"), icon: Map },
+    ];
+
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -82,8 +85,9 @@ export function Navbar() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2.5 group">
-                        <Image src="/logo.png" alt="Egypt Explorer Logo" width={250} height={200} className=" object-contain border border-transparent shadow-none" unoptimized />
+                    <Link href="/" className="flex items-center gap-1.5 group">
+                        <span className="font-display font-bold text-2xl tracking-tight text-egypt-gold">EGYPT</span>
+                        <span className={`font-display font-bold text-2xl tracking-tight transition-colors ${scrolled || !isHome ? "text-foreground" : "text-white"}`}>Explorer</span>
                     </Link>
 
                     {/* Desktop Nav */}
@@ -92,10 +96,10 @@ export function Navbar() {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className={`${linkClass(link.href)} px-3 py-2 rounded-lg hover:bg-white/10`}
+                                className={`${linkClass(link.href)} flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-white/10`}
                             >
-                                <span className="mr-1">{link.icon}</span>
-                                {link.label}
+                                <link.icon className="w-4 h-4 fill-current" />
+                                <span>{link.label}</span>
                                 {pathname === link.href && (
                                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-egypt-gold" />
                                 )}
@@ -116,11 +120,14 @@ export function Navbar() {
                         {/* Theme switcher */}
                         <ThemeSwitcher />
 
+                        {/* Language switcher */}
+                        <LanguageSwitcher />
+
                         {/* Auth */}
                         {!loading && (
                             <>
                                 {profile ? (
-                                    <div className="relative">
+                                    <div className="hidden lg:block relative">
                                         <button
                                             onClick={() => setUserMenuOpen(!userMenuOpen)}
                                             className={`flex items-center gap-2 px-3 py-1.5 rounded-xl transition-colors ${scrolled || !isHome ? "hover:bg-muted" : "hover:bg-white/10"}`}
@@ -179,7 +186,7 @@ export function Navbar() {
                                         )}
                                     </div>
                                 ) : (
-                                    <div className="flex items-center gap-2">
+                                    <div className="hidden lg:flex items-center gap-2">
                                         <Link
                                             href="/auth/login"
                                             className={`text-sm font-medium px-4 py-2 rounded-xl transition-colors ${scrolled || !isHome ? "hover:bg-muted text-foreground" : "hover:bg-white/10 text-white"}`}
@@ -223,11 +230,74 @@ export function Navbar() {
                                         : "hover:bg-muted text-foreground"
                                     }`}
                             >
-                                <span className="text-lg">{link.icon}</span>
+                                <link.icon className="w-5 h-5 fill-current opacity-80" />
                                 {link.label}
                             </Link>
                         ))}
-                        <div className="pt-2 border-t border-border mt-2">
+                        <div className="pt-2 border-t border-border mt-2 space-y-1">
+                            {profile ? (
+                                <>
+                                    <div className="px-4 py-2 flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-full bg-egypt-gold flex items-center justify-center text-sm font-bold text-white">
+                                            {profile.full_name?.[0]?.toUpperCase() || profile.email?.[0]?.toUpperCase() || "?"}
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-semibold text-foreground truncate">{profile.full_name || "User"}</p>
+                                            <p className="text-xs text-muted-foreground truncate">{profile.email}</p>
+                                        </div>
+                                    </div>
+                                    <Link
+                                        href="/profile"
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
+                                    >
+                                        <User className="w-5 h-5 text-muted-foreground" />
+                                        My Profile
+                                    </Link>
+                                    <Link
+                                        href="/favorites"
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
+                                    >
+                                        <Heart className="w-5 h-5 text-muted-foreground" />
+                                        Favorites
+                                    </Link>
+                                    {profile.role === "admin" && (
+                                        <Link
+                                            href="/admin"
+                                            onClick={() => setMobileOpen(false)}
+                                            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-muted transition-colors"
+                                        >
+                                            <Settings className="w-5 h-5 text-muted-foreground" />
+                                            Admin Dashboard
+                                        </Link>
+                                    )}
+                                    <button
+                                        onClick={() => { setMobileOpen(false); handleSignOut(); }}
+                                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-destructive/10 hover:text-destructive transition-colors w-full text-left"
+                                    >
+                                        <LogOut className="w-5 h-5" />
+                                        Sign Out
+                                    </button>
+                                </>
+                            ) : (
+                                <div className="grid grid-cols-2 gap-2 px-2 py-2">
+                                    <Link
+                                        href="/auth/login"
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium bg-muted text-foreground hover:bg-muted/80 transition-colors"
+                                    >
+                                        Sign In
+                                    </Link>
+                                    <Link
+                                        href="/auth/sign-up"
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold gradient-egypt text-white shadow-md hover:opacity-90 transition-opacity"
+                                    >
+                                        Join Free
+                                    </Link>
+                                </div>
+                            )}
                             <Link
                                 href="/suggest"
                                 onClick={() => setMobileOpen(false)}

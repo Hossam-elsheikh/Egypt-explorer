@@ -46,14 +46,9 @@ export function Footer() {
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
                     {/* Brand */}
                     <div className="lg:col-span-2">
-                        <Link href="/" className="flex items-center gap-2.5 mb-5 group">
-                            <div className="w-10 h-10 rounded-xl gradient-egypt flex items-center justify-center shadow-lg">
-                                <Image src="/logo.png" alt="Egypt Explorer Logo" width={24} height={24} className="w-6 h-6 object-contain" unoptimized />
-                            </div>
-                            <div>
-                                <span className="font-display font-bold text-xl text-white block leading-none">Egypt</span>
-                                <span className="text-xs text-egypt-gold font-semibold tracking-widest">EXPLORER</span>
-                            </div>
+                        <Link href="/" className="flex items-center gap-1.5 mb-5 group">
+                            <span className="font-display font-bold text-2xl tracking-tight text-egypt-gold">EGYPT</span>
+                            <span className="font-display font-bold text-2xl tracking-tight text-white">Explorer</span>
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-xs mb-6">
                             Your ultimate guide to exploring the land of pharaohs. Discover ancient wonders,

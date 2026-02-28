@@ -1,5 +1,6 @@
 // Egypt Tour Guide - Shared Types
-
+import React from "react";
+import { Landmark, Utensils, UtensilsCrossed, CupSoda, Map, Hotel, Sailboat } from "lucide-react";
 export type Category = "place" | "restaurant" | "food" | "drink" | "service" | "hotel" | "activity";
 export type ItemStatus = "active" | "inactive" | "pending";
 export type PriceRange = "budget" | "moderate" | "expensive" | "luxury";
@@ -166,14 +167,14 @@ export const CATEGORY_LABELS: Record<Category, string> = {
     activity: "Activities",
 };
 
-export const CATEGORY_ICONS: Record<Category, string> = {
-    place: "🏛️",
-    restaurant: "🍽️",
-    food: "🥙",
-    drink: "🥤",
-    service: "🗺️",
-    hotel: "🏨",
-    activity: "⛵",
+export const CATEGORY_ICONS: Record<Category, React.ReactElement> = {
+    place: React.createElement(Landmark, { className: "w-[1em] h-[1em] fill-current inline-block align-text-bottom" }),
+    restaurant: React.createElement(Utensils, { className: "w-[1em] h-[1em] fill-current inline-block align-text-bottom" }),
+    food: React.createElement(UtensilsCrossed, { className: "w-[1em] h-[1em] fill-current inline-block align-text-bottom" }),
+    drink: React.createElement(CupSoda, { className: "w-[1em] h-[1em] fill-current inline-block align-text-bottom" }),
+    service: React.createElement(Map, { className: "w-[1em] h-[1em] fill-current inline-block align-text-bottom" }),
+    hotel: React.createElement(Hotel, { className: "w-[1em] h-[1em] fill-current inline-block align-text-bottom" }),
+    activity: React.createElement(Sailboat, { className: "w-[1em] h-[1em] fill-current inline-block align-text-bottom" }),
 };
 
 export const CATEGORY_COLORS: Record<Category, string> = {

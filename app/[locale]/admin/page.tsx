@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import Image from "next/image";
@@ -241,8 +241,9 @@ export default function AdminDashboard() {
         return (
             <div className="min-h-screen bg-background flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-12 h-12 rounded-xl gradient-egypt flex items-center justify-center mx-auto mb-4 animate-pulse">
-                        <Image src="/logo.png" alt="Egypt Explorer Logo" width={24} height={24} className="w-6 h-6 object-contain" unoptimized />
+                    <div className="flex items-center gap-1.5 mb-4 animate-pulse">
+                        <span className="font-display font-bold text-2xl tracking-tight text-egypt-gold">EGYPT</span>
+                        <span className="font-display font-bold text-2xl tracking-tight text-foreground">Explorer</span>
                     </div>
                     <p className="text-muted-foreground">Loading Admin Dashboard...</p>
                 </div>
@@ -255,14 +256,15 @@ export default function AdminDashboard() {
             {/* Sidebar */}
             <aside className={`${sidebarOpen ? "w-64" : "w-16"} transition-all duration-300 bg-egypt-hieroglyph dark:bg-gray-950 flex flex-col flex-shrink-0`}>
                 {/* Logo */}
-                <div className="p-4 border-b border-white/10 flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl gradient-egypt flex items-center justify-center flex-shrink-0">
-                        <Image src="/logo.png" alt="Egypt Explorer Logo" width={20} height={20} className="w-5 h-5 object-contain" unoptimized />
-                    </div>
-                    {sidebarOpen && (
-                        <div>
-                            <p className="font-display font-bold text-white text-sm leading-none">Egypt Explorer</p>
-                            <p className="text-xs text-egypt-gold">Admin Panel</p>
+                <div className="p-4 border-b border-white/10 flex items-center gap-1.5">
+                    {sidebarOpen ? (
+                        <div className="flex items-center gap-1">
+                            <span className="font-display font-bold text-lg tracking-tight text-egypt-gold">EGYPT</span>
+                            <span className="font-display font-bold text-lg tracking-tight text-white">Explorer</span>
+                        </div>
+                    ) : (
+                        <div className="w-9 h-9 rounded-xl gradient-egypt flex items-center justify-center flex-shrink-0 text-white font-bold text-xs">
+                            EE
                         </div>
                     )}
                 </div>
