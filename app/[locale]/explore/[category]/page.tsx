@@ -43,8 +43,16 @@ export default function ExplorePage({ params, searchParams }: ExplorePageProps) 
 
     const supabase = createClient();
 
-    // Normalize category param to match DB enum
-    const categorySlug = category as Category;
+    // Normalize category param to match DB enum (plural to singular)
+    const categoryMap: Record<string, Category> = {
+        'places': 'place',
+        'drinks': 'drink',
+        'activities': 'activity',
+        'hotels': 'hotel',
+        'services': 'service',
+        'restaurants': 'restaurant'
+    };
+    const categorySlug = (categoryMap[category] || category) as Category;
 
     useEffect(() => {
         supabase

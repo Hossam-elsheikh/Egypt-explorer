@@ -245,7 +245,7 @@ export default function HomePage() {
                             </div>
                             <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground">Featured in Egypt</h2>
                         </div>
-                        <Link href="/explore/places?featured=true" className="text-sm font-medium text-egypt-gold hover:underline flex items-center gap-1">
+                        <Link href="/explore/place?featured=true" className="text-sm font-medium text-egypt-gold hover:underline flex items-center gap-1">
                             View all <ChevronRight className="w-4 h-4" />
                         </Link>
                     </div>

@@ -14,12 +14,12 @@ export function Navbar() {
     const t = useTranslations("Navbar");
 
     const NAV_LINKS = [
-        { href: "/explore/places", label: t("places"), icon: Landmark },
+        { href: "/explore/place", label: t("places"), icon: Landmark },
         { href: "/explore/food", label: t("food"), icon: Utensils },
-        { href: "/explore/drinks", label: t("drinks"), icon: CupSoda },
-        { href: "/explore/activities", label: t("activities"), icon: Sailboat },
-        { href: "/explore/hotels", label: t("hotels"), icon: Hotel },
-        { href: "/explore/services", label: t("services"), icon: Map },
+        { href: "/explore/drink", label: t("drinks"), icon: CupSoda },
+        { href: "/explore/activity", label: t("activities"), icon: Sailboat },
+        { href: "/explore/hotel", label: t("hotels"), icon: Hotel },
+        { href: "/explore/service", label: t("services"), icon: Map },
     ];
 
     const [scrolled, setScrolled] = useState(false);
