@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import { Category, Location, PriceRange, CATEGORY_LABELS, PRICE_RANGE_LABELS } from "@/lib/types";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";

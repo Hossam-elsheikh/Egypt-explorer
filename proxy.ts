@@ -10,7 +10,7 @@ const intlMiddleware = createMiddleware({
 export async function proxy(request: NextRequest) {
   const supabaseResponse = await updateSession(request);
 
-  // Run next-intl middleware
+  // Run next-intl proxy
   const intlResponse = intlMiddleware(request);
 
   // Merge cookies from supabase

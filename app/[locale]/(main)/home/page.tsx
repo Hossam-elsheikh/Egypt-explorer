@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { ItemCard, ItemCardSkeleton } from "@/components/item-card";
+import { ItemCard, ItemCardSkeleton } from "@/components/explore/item-card";
 import { Item, CATEGORY_ICONS, CATEGORY_LABELS, Category } from "@/lib/types";
 import { ChevronRight, Search, MapPin, Star, Compass, Camera, TrendingUp, Lightbulb } from "lucide-react";
 

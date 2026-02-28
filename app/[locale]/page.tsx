@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import { useRouter } from "@/i18n/routing";
-import { ItemCard, ItemCardSkeleton } from "@/components/item-card";
+import { ItemCard, ItemCardSkeleton } from "@/components/explore/item-card";
 import { Item, CATEGORY_ICONS, CATEGORY_LABELS, Category } from "@/lib/types";
 import { ChevronRight, Search, MapPin, Star, Compass, Camera, Lightbulb, Landmark } from "lucide-react";
 import Image from "next/image";
@@ -114,7 +114,7 @@ export default function RootPage() {
           <div className="absolute inset-0 bg-egypt-pattern opacity-20" />
 
           <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 mt-20">
-          
+
 
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 text-shadow leading-tight animate-fade-up">
               Discover the Magic

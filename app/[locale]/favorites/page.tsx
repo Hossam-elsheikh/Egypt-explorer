@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { ItemCard, ItemCardSkeleton } from "@/components/item-card";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+import { ItemCard, ItemCardSkeleton } from "@/components/explore/item-card";
 import { Item } from "@/lib/types";
 import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
