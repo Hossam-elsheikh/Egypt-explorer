@@ -1,109 +1,78 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# EGYPT Explorer — Your Complete Travel Guide
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+A premium, localized travel platform designed to provide tourists with 7,000 years of history, vibrant cuisine, and modern wonders in Egypt. Built with **Next.js**, **Supabase**, and **next-intl**, this application offers a state-of-the-art user experience for discovering the magic of Egypt.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## 🏛️ Project Purpose
 
-## Features
+The primary mission of **EGYPT Explorer** is to provide an authentic, data-driven guide for travelers. Unlike generic booking sites, it focuses on real ratings, verified local content, and precise pricing information for:
+- Ancient sites and historical monuments
+- authentic Egyptian cuisine and modern dining
+- Activities (Diving, Safaris, Stargazing)
+- Essential services and accommodations
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Proxy
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+---
 
-## Demo
+## 🏗️ Technical Workflow
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+### 1. Internationalization Architecture (`next-intl`)
+The project uses a **Localized App Router** pattern. 
+- **Middleware Integration**: `proxy.ts` (acting as the system middleware) handles session updates for Supabase while simultaneously processing `next-intl` locale redirects.
+- **Routing Wrapper**: A custom `@/i18n/routing` provides localized versions of `Link`, `useRouter`, and `usePathname`, ensuring the user's language preference is preserved across the entire session.
+- **Locale Scope**: All routes are structured under `app/[locale]`, allowing for static rendering and SEO optimization for 4 primary languages: English (EN), German (DE), French (FR), and Russian (RU).
 
-## Deploy to Vercel
+### 2. Authentication & Data Layer (`Supabase`)
+- **Supabase SSR**: Utilizes the `@supabase/ssr` package for server-side session management.
+- **RLS (Row Level Security)**: Data is protected via Postgres policies, ensuring only authorized users can suggest places or access the Admin Panel.
+- **Real-Time Database**: Travel items and locations are fetched dynamically with optimized queries for search and categorization.
 
-Vercel deployment will guide you through creating a Supabase account and project.
+### 3. Design System & UI/UX
+- **Unified Branding**: A monochromatic, text-based logo strategy ("EGYPT" in `#f59e0b` / `text-egypt-gold`) that adapts to light/dark modes and scrolled states.
+- **Premium Glassmorphism**: High-end visual depth achieved through `backdrop-filter: blur()`, using a custom-curated HSL color palette inspired by sand, lapis lazuli, and papyrus tones.
+- **Hero & Search**: A cinematic hero section with localized search redirects, providing a seamless transition to the discovery results.
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+---
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+## 💎 Features Implemented
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+### Typographic Brand Identity
+Replaced static image logos with a dynamic, typography-focused branding. The "Explorer" portion of the logo intelligently shifts between `text-white` and `text-foreground` based on the background context (e.g., Hero image vs. scrolled sticky Navbar).
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+### Cinematic Auth Pages
+The Login and Sign-Up pages feature a dual-pane editorial layout:
+- **Left Pane**: Rotating high-quality Egyptian travel photography with 110% zoom hover effects, blurred atmospheric blobs, and glass-morphic "trust badges" (Verified Gems, User Ratings).
+- **Right Pane**: Minimalist, localized forms with real-time language switching and internationalized placeholders.
 
-## Clone and run locally
+### "Why Explore Egypt?" Highlights
+A high-engagement section featuring large, image-centric cards. 
+- **Interaction**: On hover, background images zoom in smoothly while a tinted gradient reveal (Amber, Rose, Cyan, Yellow) and descriptive text slide into view.
+- **Technical**: Responsive grid (1 to 4 columns) with shadow-depth transitions and golden accent reveals.
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+### Global Language Switcher
+- **Navbar Integration**: Floating language switcher for global navigation.
+- **Auth Page Selector**: Horizontal, low-friction language pills at the base of the Auth forms that refresh the entire UI context without losing the form context.
 
-2. Create a Next.js app using the Supabase Starter template npx command
+### Search & Filtering
+- Localized search input that detects language preference and routes queries to the appropriate localized route (`/[locale]/search?q=...`).
 
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
-   ```
+---
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+## 🛠️ Tech Stack Details
 
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
+| Technology | Purpose |
+| :--- | :--- |
+| **Next.js 15+** | Framework & Static/Server Rendering |
+| **Supabase** | Auth, Database, and Session Middleware |
+| **next-intl** | Core Internationalization (i18n) |
+| **Tailwind CSS** | Premium Styling & Micro-animations |
+| **Lucide React** | Consistent Iconography |
+| **Playfair Display** | Font system for editorial headings (Titles) |
+| **Plus Jakarta Sans** | Font system for clarity (UI/Text) |
 
-3. Use `cd` to change into the app's directory
+---
 
-   ```bash
-   cd with-supabase-app
-   ```
+## 🚀 Getting Started
 
-4. Rename `.env.example` to `.env.local` and update the following:
-
-  ```env
-  NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[INSERT SUPABASE PROJECT API PUBLISHABLE OR ANON KEY]
-  ```
-  > [!NOTE]
-  > This example uses `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, which refers to Supabase's new **publishable** key format.
-  > Both legacy **anon** keys and new **publishable** keys can be used with this variable name during the transition period. Supabase's dashboard may show `NEXT_PUBLIC_SUPABASE_ANON_KEY`; its value can be used in this example.
-  > See the [full announcement](https://github.com/orgs/supabase/discussions/29260) for more information.
-
-  Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
-
-5. You can now run the Next.js local development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
-
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
-
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
-
-## Feedback and issues
-
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
-
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+1.  **Clone & Install**: `npm install`
+2.  **Environment Setup**: Configure `.env.local` with your Supabase URL and Anon Key.
+3.  **Run**: `npm run dev`
+4.  **Admin Access**: Navigate to `/admin` (Access is restricted to users with the `admin` role in the `profiles` table).
